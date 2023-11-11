@@ -1,0 +1,13 @@
+.basket-table{
+    
+}
+.basket-table tr{
+    vertical-align: middle;
+}
+.basket-table img{
+    width: 250px;
+}
+button{
+    margin-left: 10px;
+    margin-right: 10px;
+}

@@ -1,0 +1,19 @@
+.burger-title span{
+    font-weight: 700;
+}
+.span-c1{
+    color: #6B6B6B;
+    font-size: 14px;
+}
+.burger-set2{
+    width: 20%;
+    background-color: rgba(0, 0, 0, 0.03);
+    text-align: center;
+    padding: 30px;
+}
+.burger-set2 img{
+    width: 80%;  
+}
+.burger-set3 img{
+    width: 15%;
+}
