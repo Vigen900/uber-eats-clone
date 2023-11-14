@@ -1,85 +1,74 @@
-import './basket.css';
 
-export default function Basket(){
-    const basket = [
-        {
-            name:'McDouble® Comes With',
-            icon:'https://tb-static.uber.com/prod/image-proc/processed_images/6382f13784f101e0f7c56554f2ac6cbc/a19bb09692310dfd41e49a96c424b3a6.jpeg',
-            deliveryTime:'$ 2.30  •  150 cal.',
-            id:"",
-            count:1,
-            price:900,
-        },
-        {
-            name:'McDouble® nugeets',
-            icon:'https://tb-static.uber.com/prod/image-proc/processed_images/9662ab58e4baf79bd8e5185d42d43f00/5954bcb006b10dbfd0bc160f6370faf3.jpeg',
-            deliveryTime:'$ 3.30  •  150 cal.',
-            id:'',
-            count:2,
-            price:150,
-        },
-        {
-            name:'Hash Browns',
-            icon:'https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvOTQ5MzY1OGRjNTliM2RmODZlZDk0MmM3ODM4ZmNiNjUvNTk1NGJjYjAwNmIxMGRiZmQwYmMxNjBmNjM3MGZhZjMuanBlZw==',
-            deliveryTime:'$ 3.19  •  150 cal.',
-            id:'',
-            count:3,
-            price:390,
-        },
-        {
-            name:'Sausage McMuffin®',
-            icon:'https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvMmExYzIyM2Q0NzRkYjg2OGY5MzJiZDJhMDRlZjczYWUvNTk1NGJjYjAwNmIxMGRiZmQwYmMxNjBmNjM3MGZhZjMuanBlZw==',
-            deliveryTime:'$ 1.19  •  270 cal',
-            id:'',
-            count:4,
-            price:400,
-        },
-        {
-            name:'Hotcakes and Sausage',
-            icon:'https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvOTQ5MzY1OGRjNTliM2RmODZlZDk0MmM3ODM4ZmNiNjUvNTk1NGJjYjAwNmIxMGRiZmQwYmMxNjBmNjM3MGZhZjMuanBlZw==',
-            deliveryTime:'$ 6.19  •  780 cal.',
-            id:'',
-            count:5,
-            price:200,
-        },
-        {
-            name:'Sausage Burrito',
-            icon:'https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvYjk3YmNkMWZkZWY1OWUzYWUyNTEyNWFmMGM5M2NlYjMvNTk1NGJjYjAwNmIxMGRiZmQwYmMxNjBmNjM3MGZhZjMuanBlZw==',
-            deliveryTime:'$ 3.40 •  380 cal.',
-            id:'',
-            count:6,
-            price:100,
-        }
-    ]
-    return (<>
-        <form>
-            <table className="basket-table" cellPadding={40}>
-                {basket.map((data)=>
-                    <tr>
-                        <td>
-                            <a href="">
-                                <img src={data.icon}/>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="">
-                                <span>{data.name}</span>
-                            </a>
-                        </td>
-                        <td>
-                            <span>{data.price}</span>
-                        </td>
-                        <td>
-                            <button>-</button>
-                            <span>{data.count}</span>
-                            <button>+</button>
-                        </td>
-                        <td>
-                            <span>{data.count * data.price}</span>
-                        </td>
-                    </tr>
-            )}
+import { useState } from 'react'
+import BasketItem from '../components/basket-item'
+import './basket.css'
+
+
+const productsList = [
+    {
+        id:1,
+        img:'https://tb-static.uber.com/prod/image-proc/processed_images/db3c6966ae5f42e857598331c222d425/5954bcb006b10dbfd0bc160f6370faf3.jpeg',
+        title:'Medium French Fries', 
+        price:4.89,
+        cal:'320 Cal.',
+        count:1,
+    },
+    {
+        id:2,
+        img:'https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvYTlkMmExNWRkMDJiYWQxYTI1NzY1OWE3Y2IzNGE1YzIvNTk1NGJjYjAwNmIxMGRiZmQwYmMxNjBmNjM3MGZhZjMuanBlZw==',
+        title:'10 pc. Chicken McNuggets® Meal', 
+        price:11.59,
+        cal:'740 - 980 Cal.', 
+        count:1,
+    },
+    {
+        id:3,
+        img:'https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvNzFlYWQ5ZGI4OTZlYzExMmZkMTZlMGRmYTI0N2VmZTkvNTk1NGJjYjAwNmIxMGRiZmQwYmMxNjBmNjM3MGZhZjMuanBlZw==',
+        title:'10 pc. Chicken McNuggets®', 
+        price:6.19,
+        cal:'410 Cal.', 
+        count:1,
+    },
+    {
+        id:4,
+        img:'https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvZmFkYzI4MTgxZjE1MDVhODAzYmIwZjFkMjM4NGU1ZGIvYTE5YmIwOTY5MjMxMGRmZDQxZTQ5YTk2YzQyNGIzYTYuanBlZw==',
+        title:'Double Cheeseburger', 
+        price:4.59,
+        cal:'450 Cal.', 
+        count:1,
+    },
+    {
+        id:5,
+        img:'https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvYjQ4MGM5NjcwMzVmOGE5ZWVkOWIzZGVjMTgxZTQxOGEvYTE5YmIwOTY5MjMxMGRmZDQxZTQ5YTk2YzQyNGIzYTYuanBlZw==',
+        title:'McChicken®', 
+        price:4.59,
+        cal:'400 Cal.', 
+        count:1,
+    },
+]
+export default function Basket () {
+  
+    const [grandTotal, setGrandTotal] = useState(0)
+    function countChange (id, count) {
+        const pr = productsList.find((k)=> k.id===id);
+        pr.count = count;
+        const grandTotalAmount = productsList.reduce((a,b) =>{
+            return(a + b.count * b.price)
+        },0)
+        setGrandTotal(grandTotalAmount)
+        
+    }
+  
+    return <>
+       <form>
+            <table className="basket-table" cellPadding={46}>
+                <tbody>
+                    {productsList.map((cart, index)=>
+                     <BasketItem onCountChange={countChange} key={index} cart={cart}></BasketItem>
+                    )}
+                </tbody>
             </table>
-        </form>
-    </>);
+            <span>AMOUNT {(grandTotal).toFixed(2)}</span>
+       </form>
+    </>
 }
