@@ -1,7 +1,7 @@
 import './menu-item.css';
 import { Route, Routes, Link } from 'react-router-dom';
 
-export default function MenuItem({data}){
+export default function MenuItem({data, onAddToCard}){
     return (<>
     <Link to="/single-product">
         <div className = 'burger-item'>
@@ -12,5 +12,6 @@ export default function MenuItem({data}){
             </div>
         </div>
     </Link>
+    <button className='addToCard' onClick={()=> onAddToCard(data.id)}>add to card</button>
     </>)
 }
